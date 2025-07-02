@@ -1,49 +1,46 @@
-e# Tiny Tapeout project information
-project:        "fsdf"
-  title:        "mother"      # Project title
-  author:       "dad"      # Your name
-  discord:      "sister"      # Your discord username (optional)
-  description:  "ga"      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     50       # Clock frequency in Hz (or 0 if not applicable)
+# Tiny Tapeout project information
+project: "fsdf"
+title: "Simple 8-bit Counter"  # Descriptive title
+author: "Dad"                 # Capitalized for consistency
+discord: "sister"             # Optional, kept as is
+description: "An 8-bit counter with parallel input and output"  # Clear description
+language: "Verilog"           # Unchanged
+clock_hz: 25000000           # Corrected to 25 MHz, typical for Tiny Tapeout
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+# Tile size (unchanged, as 1x1 is valid)
+tiles: "1x1"                 # Single tile, 167x108 µm
 
-  # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_asiclab_example"
+# Top module with unique identifier (using author's name for uniqueness)
+top_module: "tt_um_dad_counter"
 
-  # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
-  source_files:
-    - "project.v"
+# Source files (formatted for clarity)
+source_files:
+  - "project.v"              # Ensured file is in ./src
 
-# The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
+# Pinout with descriptive names
 pinout:
-  # Inputs
-  ui[0]: "ui_in[0]"
-  ui[1]: "ui_in[1]"
-  ui[2]: "ui_in[2]"
-  ui[3]: "ui_in[3]"
-  ui[4]: "ui_in[4]"
-  ui[5]: "ui_in[5]"
-  ui[6]: "ui_in[6]"
-  ui[7]: "ui_in[7]"
+  # Inputs (example: control signals and data inputs for a counter)
+  ui[0]: "reset"            # Reset signal
+  ui[1]: "enable"           # Counter enable
+  ui[2]: "data_in[0]"       # Parallel data input
+  ui[3]: "data_in[1]"
+  ui[4]: "data_in[2]"
+  ui[5]: "data_in[3]"
+  ui[6]: "data_in[4]"
+  ui[7]: "data_in[5]"
 
-  # Outputs
-  uo[0]: "uo_out[0]"
-  uo[1]: "uo_out[1]"
-  uo[2]: "uo_out[2]"
-  uo[3]: "uo_out[3]"
-  uo[4]: "uo_out[4]"
-  uo[5]: "uo_out[5]"
-  uo[6]: "uo_out[6]"
-  uo[7]: "uo_out[7]"
+  # Outputs (example: counter output)
+  uo[0]: "count[0]"         # Counter output bits
+  uo[1]: "count[1]"
+  uo[2]: "count[2]"
+  uo[3]: "count[3]"
+  uo[4]: "count[4]"
+  uo[5]: "count[5]"
+  uo[6]: "count[6]"
+  uo[7]: "count[7]"
 
-  # Bidirectional pins
-  uio[0]: ""
+  # Bidirectional pins (explicitly marked unused)
+  uio[0]: ""                # Unused
   uio[1]: ""
   uio[2]: ""
   uio[3]: ""
