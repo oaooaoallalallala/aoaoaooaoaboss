@@ -16,23 +16,27 @@ module tt_um_asiclab_example (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = ui_in + uio_in;  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
+    // All output pins must be assigned. If not used, assign to 0.
+    assign uio_out = 0;
+    assign uio_oe   = 0;
 
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
-  wire reset= ~rst_n;
-  assign uio_out=0;
-  assign uio_oe=0;
-  wire_unuse=&{ena,uio_in,1'b0};
-  always@(posedge clk or posedge reset) begin
-        if (reset) begin
-            uo_out<=0;
-        end else begin 
-            uo_out[3:0] <=ui_in [7:4] +ui_in[3:0];
-            uo_out[7:4]<=0;
+    // Synchronous logic for uo_out
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin // Active low reset
+            uo_out <= 8'b0;
+        end else begin
+            // Sum of upper and lower nibbles of ui_in, assigned to the lower nibble of uo_out
+            uo_out[3:0] <= ui_in[7:4] + ui_in[3:0];
+            uo_out[7:4] <= 4'b0; // Assign upper nibble of uo_out to 0
         end
     end
+
+    // List all unused inputs to prevent warnings
+    // It's good practice to list all genuinely unused inputs.
+    // For `ena`, `uio_in`, if not used in the final logic, they can be included here.
+    wire _unused_ena = ena;
+    wire _unused_uio_in = uio_in;
+    // clk and rst_n are used in the always block, so they are not unused.
+    // ui_in is used in the always block, so it is not unused.
+
 endmodule
